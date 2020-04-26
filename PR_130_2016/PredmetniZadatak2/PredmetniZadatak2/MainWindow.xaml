@@ -1,0 +1,34 @@
+﻿<Window x:Class="PredmetniZadatak2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PredmetniZadatak2"
+        mc:Ignorable="d"
+        Title="Electrical distribution network" WindowState="Maximized" Name="mainWindow" Width="1100" Height="700">
+
+    <Grid>
+        <DockPanel Background="Black">
+            <Slider x:Name="slider" Minimum=".1" Maximum="10" Value="1" DockPanel.Dock="Top"/>
+            <ScrollViewer Name="scrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <Border Name="frame" BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Canvas Name="myCanvas" Width="1100" Height="700">
+                        <Canvas.LayoutTransform>
+                            <ScaleTransform ScaleX="{Binding ElementName=slider, Path=Value}"
+                                            ScaleY="{Binding ElementName=slider, Path=Value}"/>
+                        </Canvas.LayoutTransform>
+
+                        <Label Foreground="White" Canvas.Left="5">Legend</Label>
+                        <Image Source="/Images/circle3.png" Width="20" Height="20" Canvas.Left="10" Canvas.Top="31"/>
+                        <Label Foreground="White" Canvas.Left="39" Canvas.Top="28" FontSize="10">Substations</Label>
+                        <Image Source="/Images/circle2.png" Width="20" Height="20" Canvas.Left="10" Canvas.Top="56"/>
+                        <Label Foreground="White" Canvas.Left="39" Canvas.Top="54" FontSize="10">Node</Label>
+                        <Image Source="/Images/circle1.png" Width="20" Height="20" Canvas.Left="10" Canvas.Top="81"/>
+                        <Label Foreground="White" Canvas.Left="39" Canvas.Top="81" FontSize="10">Switch</Label>
+                        
+                    </Canvas>
+                </Border>
+            </ScrollViewer>
+        </DockPanel>
+    </Grid>
+</Window>
