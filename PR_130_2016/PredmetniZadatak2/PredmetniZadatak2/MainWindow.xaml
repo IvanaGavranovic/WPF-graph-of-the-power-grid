@@ -25,6 +25,8 @@
                         <Label Foreground="White" Canvas.Left="39" Canvas.Top="54" FontSize="10">Node</Label>
                         <Image Source="/Images/circle1.png" Width="20" Height="20" Canvas.Left="10" Canvas.Top="81"/>
                         <Label Foreground="White" Canvas.Left="39" Canvas.Top="81" FontSize="10">Switch</Label>
+
+                        <Image Name="mainScreen"></Image>
                         
                     </Canvas>
                 </Border>
