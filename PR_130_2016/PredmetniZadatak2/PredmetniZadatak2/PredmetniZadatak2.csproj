@@ -70,6 +70,10 @@
     <Compile Include="Classes\Point.cs" />
     <Compile Include="Classes\SubstationEntity.cs" />
     <Compile Include="Classes\SwitchEntity.cs" />
+    <Compile Include="Handlers\CoordinatesHandler.cs" />
+    <Compile Include="Handlers\GridHandler.cs" />
+    <Compile Include="Handlers\ScreenHandler.cs" />
+    <Compile Include="Handlers\XmlHandler.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

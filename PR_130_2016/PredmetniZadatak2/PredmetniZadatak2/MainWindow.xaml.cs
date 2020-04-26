@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PredmetniZadatak2.Classes;
+using PredmetniZadatak2.Handlers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +17,28 @@ using System.Windows.Shapes;
 
 namespace PredmetniZadatak2
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        public UInt64[,] grid = new UInt64[1000, 1000];
+
+        private NetworkModel networkModel = new NetworkModel();
+        private List<Tuple<UInt64, UInt64>> drawnLines = new List<Tuple<ulong, ulong>>();
+
+        private DrawingImage drawingImage;
+        private DrawingGroup drawingGroup;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            drawingImage = new DrawingImage();
+            mainScreen.Source = drawingImage;
+
+            drawingGroup = new DrawingGroup();
+            drawingImage.Drawing = drawingGroup;
+
+            grid = GridHandler.MakeGrid();
+            networkModel = GridHandler.LoadNetworkModel(networkModel, grid, drawingGroup, myCanvas, out grid);
         }
     }
 }
