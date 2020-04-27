@@ -22,8 +22,7 @@ namespace PredmetniZadatak2
         public UInt64[,] grid = new UInt64[1000, 1000];
 
         private NetworkModel networkModel = new NetworkModel();
-        private List<Tuple<UInt64, UInt64>> drawnLines = new List<Tuple<ulong, ulong>>();
-
+       
         private DrawingImage drawingImage;
         private DrawingGroup drawingGroup;
 

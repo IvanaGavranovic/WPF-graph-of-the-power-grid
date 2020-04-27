@@ -17,7 +17,27 @@ namespace PredmetniZadatak2.Handlers
             ImageDrawing image = new ImageDrawing();
             image.ImageSource = new BitmapImage(new Uri(@"..\..\Images\circle3.png", UriKind.Relative));
 
-            image.Rect = new Rect((indexJ / 1000.0) * myCanvas.Width * 4.7, (indexI / 1000.0) * myCanvas.Height * 7, 3, 3);
+            image.Rect = new Rect((indexJ / 1000.0) * myCanvas.Width * 4.7, (indexI / 1000.0) * myCanvas.Height * 6.8, 3, 3);
+
+            return image;
+        }
+
+        public static ImageDrawing DrawNodeImage(int indexI, int indexJ, Canvas myCanvas)
+        {
+            ImageDrawing image = new ImageDrawing();
+            image.ImageSource = new BitmapImage(new Uri(@"..\..\Images\circle2.png", UriKind.Relative));
+
+            image.Rect = new Rect((indexJ / 1000.0) * myCanvas.Width * 4.7, (indexI / 1000.0) * myCanvas.Height * 6.8, 3, 3);
+
+            return image;
+        }
+
+        public static ImageDrawing DrawSwitchImage(int indexI, int indexJ, Canvas myCanvas)
+        {
+            ImageDrawing image = new ImageDrawing();
+            image.ImageSource = new BitmapImage(new Uri(@"..\..\Images\circle1.png", UriKind.Relative));
+
+            image.Rect = new Rect((indexJ / 1000.0) * myCanvas.Width * 4.7, (indexI / 1000.0) * myCanvas.Height * 6.8, 3, 3);
 
             return image;
         }
