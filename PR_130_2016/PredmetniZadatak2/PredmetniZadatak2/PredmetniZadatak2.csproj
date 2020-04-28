@@ -105,19 +105,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\circle1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\circle2.png" />
-    <Resource Include="Images\circle3.png" />
-    <Resource Include="Images\horizontalLine.png" />
-    <Resource Include="Images\verticalLine.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\circle4.png" />
-    <Resource Include="Images\circle5.png" />
-    <Resource Include="Images\circle6.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

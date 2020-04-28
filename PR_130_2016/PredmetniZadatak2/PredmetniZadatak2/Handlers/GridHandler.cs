@@ -6,12 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace PredmetniZadatak2.Handlers
 {
     public class GridHandler
     {
         public static Dictionary<UInt64, Entity> Entities = new Dictionary<UInt64, Entity>();
+        static List<int> IndexesI = new List<int>();
+        static List<int> IndexesJ = new List<int>();
 
         public static UInt64[,] MakeGrid()
         {
@@ -24,12 +27,11 @@ namespace PredmetniZadatak2.Handlers
                     grid[i, j] = 0;
                 }
             }
-
             return grid;
         }
-        public static NetworkModel LoadNetworkModel(NetworkModel networkModel, UInt64[,] grid, DrawingGroup drawingGroup, Canvas myCanvas, out UInt64[,] networkGrid)
+
+        public static NetworkModel LoadNetworkModel(NetworkModel networkModel, UInt64[,] grid, Canvas myCanvas)
         {
-            networkGrid = new UInt64[1000, 1000];
             int counter = 0;
 
             networkModel = XmlHandler.Load<NetworkModel>(@"..\..\Geographic.xml");
@@ -39,32 +41,31 @@ namespace PredmetniZadatak2.Handlers
             {
                 double decimalX, decimalY;
                 CoordinatesHandler.ToLatLon(networkModel.Substations[i].X, networkModel.Substations[i].Y, 34, out decimalX, out decimalY);
-                networkModel.Substations[i].X = decimalX;
-                networkModel.Substations[i].Y = decimalY;
 
                 int indexI, indexJ;
                 CoordinatesHandler.FromCoordsToIndex(decimalX, decimalY, out indexI, out indexJ);
 
                 if (grid[indexI, indexJ] == 0)
                 {
-                    networkGrid[indexI, indexJ] = networkModel.Substations[i].Id;
                     grid[indexI, indexJ] = networkModel.Substations[i].Id;
 
                     networkModel.Substations[i].Row = indexI;
                     networkModel.Substations[i].Column = indexJ;
+                    IndexesI.Add(indexI);
+                    IndexesJ.Add(indexJ);
 
                     Entities.Add(networkModel.Substations[i].Id, networkModel.Substations[i]);
                 }
-                ImageDrawing image = ScreenHandler.DrawSubstationImage(indexI, indexJ, myCanvas);
-                drawingGroup.Children.Add(image);
+
+                Ellipse image = ScreenHandler.DrawSubstationImage(indexI, indexJ, myCanvas, networkModel.Substations[i]);
+                myCanvas.Children.Add(image);
             }
+
             // NODES
             for (int i = 0; i < networkModel.Nodes.Count; i++)
             {
                 double decimalX, decimalY;
                 CoordinatesHandler.ToLatLon(networkModel.Nodes[i].X, networkModel.Nodes[i].Y, 34, out decimalX, out decimalY);
-                networkModel.Nodes[i].X = decimalX;
-                networkModel.Nodes[i].Y = decimalY;
 
                 int indexI, indexJ;
                 CoordinatesHandler.FromCoordsToIndex(decimalX, decimalY, out indexI, out indexJ);
@@ -72,28 +73,27 @@ namespace PredmetniZadatak2.Handlers
                 if (grid[indexI, indexJ] == 0)
                 {
                     grid[indexI, indexJ] = networkModel.Nodes[i].Id;
-                    networkGrid[indexI, indexJ] = networkModel.Nodes[i].Id;
                 }
                 else
                 {
                     bool spaceFound = FindFreeSpaceForNode(networkModel, grid, indexI, indexJ, i, out indexI, out indexJ);
 
                     grid[indexI, indexJ] = networkModel.Nodes[i].Id;
-                    networkGrid[indexI, indexJ] = networkModel.Nodes[i].Id;
 
                     if (!spaceFound)
                     {
                         counter++;
                     }
                 }
-
                 networkModel.Nodes[i].Row = indexI;
                 networkModel.Nodes[i].Column = indexJ;
+                IndexesI.Add(indexI);
+                IndexesJ.Add(indexJ);
 
                 Entities.Add(networkModel.Nodes[i].Id, networkModel.Nodes[i]);
 
-                ImageDrawing image = ScreenHandler.DrawNodeImage(indexI, indexJ, myCanvas);
-                drawingGroup.Children.Add(image);
+                Ellipse image = ScreenHandler.DrawNodeImage(indexI, indexJ, myCanvas, networkModel.Nodes[i]);
+                myCanvas.Children.Add(image);
             }
 
             // SWITCHES
@@ -110,14 +110,12 @@ namespace PredmetniZadatak2.Handlers
                 if (grid[indexI, indexJ] == 0)
                 {
                     grid[indexI, indexJ] = networkModel.Switches[i].Id;
-                    networkGrid[indexI, indexJ] = networkModel.Switches[i].Id;
                 }
                 else
                 {
                     bool spaceFound = FindFreeSpaceForSwitch(networkModel, grid, indexI, indexJ, i, out indexI, out indexJ);
 
                     grid[indexI, indexJ] = networkModel.Switches[i].Id;
-                    networkGrid[indexI, indexJ] = networkModel.Switches[i].Id;
 
                     if (!spaceFound)
                     {
@@ -127,12 +125,19 @@ namespace PredmetniZadatak2.Handlers
 
                 networkModel.Switches[i].Row = indexI;
                 networkModel.Switches[i].Column = indexJ;
+                IndexesI.Add(indexI);
+                IndexesJ.Add(indexJ);
 
                 Entities.Add(networkModel.Switches[i].Id, networkModel.Switches[i]);
 
-                ImageDrawing image = ScreenHandler.DrawSwitchImage(indexI, indexJ, myCanvas);
-                drawingGroup.Children.Add(image);
+                Ellipse image = ScreenHandler.DrawSwitchImage(indexI, indexJ, myCanvas, networkModel.Switches[i]);
+                myCanvas.Children.Add(image);
             }
+
+            int minI = IndexesI.Min();          // 672
+            int minJ = IndexesJ.Min();          // 726
+            int maxI = IndexesI.Max();          // 811
+            int maxJ = IndexesJ.Max();          // 951
 
             return networkModel;
         }
@@ -178,11 +183,12 @@ namespace PredmetniZadatak2.Handlers
                 }
                 else if (grid[(indexI + step) % 1000, indexJ] == 0)
                 {
-                    indexI = (indexI + step) % 1000; ;
+                    indexI = (indexI + step) % 1000;
                     grid[indexI, indexJ] = networkModel.Nodes[i].Id;
                     spaceFound = true;
                 }
 
+                // trazi se u 16 krugova
                 if (++step == 16)
                 {
                     break;
@@ -241,6 +247,7 @@ namespace PredmetniZadatak2.Handlers
                     spaceFound = true;
                 }
 
+                // trazi se u 16 krugova
                 if (++step == 16)
                 {
                     break;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PredmetniZadatak2.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,78 +8,64 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace PredmetniZadatak2.Handlers
 {
     public class ScreenHandler
-    { 
-        public static ImageDrawing DrawSubstationImage(int indexI, int indexJ, Canvas myCanvas)
+    {
+        public static List<Image> images = new List<Image>();
+        public static double MinI = 672;
+        public static double MinJ = 726;
+        public static double MaxI = 811;
+        public static double MaxJ = 951;
+
+        public static Ellipse DrawSubstationImage(int indexI, int indexJ, Canvas myCanvas, SubstationEntity station)
         {
-            ImageDrawing image = new ImageDrawing();
-            image.ImageSource = new BitmapImage(new Uri(@"..\..\Images\circle4.png", UriKind.Relative));
+            Ellipse element = new Ellipse() { Width = 3, Height = 3, Fill = Brushes.LightGreen };
+            element.ToolTip = $"ID: {station.Id}\nSubstation\nName: {station.Name}";
+            Canvas.SetLeft(element, ((double)indexJ - MinJ) / (MaxJ - MinJ) * myCanvas.Width);
+            Canvas.SetTop(element, ((double)indexI - MinI) / (MaxI - MinI) * myCanvas.Height);
 
-            image.Rect = new Rect((indexJ / 1000.0) * myCanvas.Width * 4.7, (indexI / 1000.0) * myCanvas.Height * 7, 3, 3);
-
-            return image;
+            return element;
         }
 
-        public static ImageDrawing DrawNodeImage(int indexI, int indexJ, Canvas myCanvas)
+        public static Ellipse DrawNodeImage(int indexI, int indexJ, Canvas myCanvas, NodeEntity node)
         {
-            ImageDrawing image = new ImageDrawing();
-            image.ImageSource = new BitmapImage(new Uri(@"..\..\Images\circle5.png", UriKind.Relative));
+            Ellipse element = new Ellipse() { Width = 3, Height = 3, Fill = Brushes.Orange };
+            element.ToolTip = $"ID: {node.Id}\nNode\nName: {node.Name}";
+            Canvas.SetLeft(element, ((double)indexJ - MinJ) / (MaxJ - MinJ) * myCanvas.Width);
+            Canvas.SetTop(element, ((double)indexI - MinI) / (MaxI - MinI) * myCanvas.Height);
 
-            image.Rect = new Rect((indexJ / 1000.0) * myCanvas.Width * 4.7, (indexI / 1000.0) * myCanvas.Height * 7, 3, 3);
-
-            return image;
+            return element;
         }
 
-        public static ImageDrawing DrawSwitchImage(int indexI, int indexJ, Canvas myCanvas)
+        public static Ellipse DrawSwitchImage(int indexI, int indexJ, Canvas myCanvas, SwitchEntity switchEntity)
         {
-            ImageDrawing image = new ImageDrawing();
-            image.ImageSource = new BitmapImage(new Uri(@"..\..\Images\circle1.png", UriKind.Relative));
+            Ellipse element = new Ellipse() { Width = 3, Height = 3, Fill = Brushes.LightSkyBlue };
+            element.ToolTip = $"ID: {switchEntity.Id}\nSwitch\nName: {switchEntity.Name}";
+            Canvas.SetLeft(element, ((double)indexJ - MinJ) / (MaxJ - MinJ) * myCanvas.Width);
+            Canvas.SetTop(element, ((double)indexI - MinI) / (MaxI - MinI) * myCanvas.Height);
 
-            image.Rect = new Rect((indexJ / 1000.0) * myCanvas.Width * 4.7, (indexI / 1000.0) * myCanvas.Height * 7, 3, 3);
-
-            return image;
+            return element;
         }
 
-        public static ImageDrawing DrawRightHorizontalLine(double x1, double y1, double x2, double y2)
+        public static Line DrawLine(double x1, double y1, double x2, double y2, LineEntity lineEntity)
         {
-            ImageDrawing image = new ImageDrawing();
-            image.ImageSource = new BitmapImage(new Uri(@"..\..\Images\horizontalLine.png", UriKind.Relative));
+            Line line = new Line()
+            {
+                X1 = x1,
+                X2 = x2,
+                Y1 = y1,
+                Y2 = y2,
+                StrokeThickness = 0.5,
+                Stroke = Brushes.White
+            };
 
-            image.Rect = new Rect(x1 + 1.5, y1 + 0.5, x2 - x1, 2);
+            line.ToolTip = $"ID: {lineEntity.Id}\nLine\nName:{lineEntity.Name}";
+            ///////////////////////////////////////////////////////////////////
 
-            return image;
-        }
-
-        public static ImageDrawing DrawLeftHorizontalLine(double x1, double y1, double x2, double y2)
-        {
-            ImageDrawing image = new ImageDrawing();
-            image.ImageSource = new BitmapImage(new Uri(@"..\..\Images\horizontalLine.png", UriKind.Relative));
-
-            image.Rect = new Rect(x2 + 1.5, y1 + 0.5, x1 - x2, 2);
-
-            return image;
-        }
-
-        public static ImageDrawing DrawDownVerticalLine(double x1, double y1, double x2, double y2)
-        {
-            ImageDrawing image = new ImageDrawing();
-            image.ImageSource = new BitmapImage(new Uri(@"..\..\Images\verticalLine.png", UriKind.Relative));
-
-            image.Rect = new Rect(x1 + 0.5, y1 + 1.5, 2, y2 - y1);
-
-            return image;
-        }
-
-        public static ImageDrawing DrawUpVerticalLine(double x1, double y1, double x2, double y2)
-        {
-            ImageDrawing image = new ImageDrawing();
-            image.ImageSource = new BitmapImage(new Uri(@"..\..\Images\verticalLine.png", UriKind.Relative));
-            image.Rect = new Rect(x1 + 0.5, y2 + 1.5, 2, y1 - y2);
-
-            return image;
+            return line;
         }
     }
 }

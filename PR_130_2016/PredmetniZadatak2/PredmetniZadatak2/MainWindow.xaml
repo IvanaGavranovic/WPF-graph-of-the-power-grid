@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PredmetniZadatak2"
         mc:Ignorable="d"
-        Title="Electrical distribution network" WindowState="Maximized" Name="mainWindow" Width="1100" Height="700">
+        Title="Electrical distribution network" WindowState="Maximized" Name="mainWindow">
 
     <Grid>
         <DockPanel Background="Black">
@@ -18,16 +18,19 @@
                                             ScaleY="{Binding ElementName=slider, Path=Value}"/>
                         </Canvas.LayoutTransform>
 
+
                         <Label Foreground="White" Canvas.Left="5">Legend</Label>
-                        <Image Source="/Images/circle4.png" Width="20" Height="20" Canvas.Left="10" Canvas.Top="31"/>
+
+                        <Ellipse Width="20" Height="20" Canvas.Left="10" Canvas.Top="31" Fill="LightGreen" />
                         <Label Foreground="White" Canvas.Left="39" Canvas.Top="28" FontSize="10">Substations</Label>
-                        <Image Source="/Images/circle5.png" Width="20" Height="20" Canvas.Left="10" Canvas.Top="56"/>
+
+                        <Ellipse Width="20" Height="20" Canvas.Left="10" Canvas.Top="56" Fill="Orange" />
                         <Label Foreground="White" Canvas.Left="39" Canvas.Top="54" FontSize="10">Node</Label>
-                        <Image Source="/Images/circle1.png" Width="20" Height="20" Canvas.Left="10" Canvas.Top="81"/>
+
+                        <Ellipse Width="20" Height="20" Canvas.Left="10" Canvas.Top="81" Fill="LightSkyBlue" />
                         <Label Foreground="White" Canvas.Left="39" Canvas.Top="81" FontSize="10">Switch</Label>
 
                         <Image Name="mainScreen"></Image>
-                        
                     </Canvas>
                 </Border>
             </ScrollViewer>
