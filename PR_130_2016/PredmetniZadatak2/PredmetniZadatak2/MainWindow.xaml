@@ -19,9 +19,9 @@
                         </Canvas.LayoutTransform>
 
                         <Label Foreground="White" Canvas.Left="5">Legend</Label>
-                        <Image Source="/Images/circle3.png" Width="20" Height="20" Canvas.Left="10" Canvas.Top="31"/>
+                        <Image Source="/Images/circle4.png" Width="20" Height="20" Canvas.Left="10" Canvas.Top="31"/>
                         <Label Foreground="White" Canvas.Left="39" Canvas.Top="28" FontSize="10">Substations</Label>
-                        <Image Source="/Images/circle2.png" Width="20" Height="20" Canvas.Left="10" Canvas.Top="56"/>
+                        <Image Source="/Images/circle5.png" Width="20" Height="20" Canvas.Left="10" Canvas.Top="56"/>
                         <Label Foreground="White" Canvas.Left="39" Canvas.Top="54" FontSize="10">Node</Label>
                         <Image Source="/Images/circle1.png" Width="20" Height="20" Canvas.Left="10" Canvas.Top="81"/>
                         <Label Foreground="White" Canvas.Left="39" Canvas.Top="81" FontSize="10">Switch</Label>
