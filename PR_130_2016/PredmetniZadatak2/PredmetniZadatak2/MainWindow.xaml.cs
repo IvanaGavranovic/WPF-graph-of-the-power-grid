@@ -63,7 +63,6 @@ namespace PredmetniZadatak2
                 else
                 {
                     drawnLines.Add(new Tuple<ulong, ulong>(idStart, idStop));
-                    // provjeriti da li su indeksi grida vec popunjeni linijama
                 }
 
                 int rowStart = GridHandler.Entities[idStart].Row;       // 729
@@ -83,12 +82,10 @@ namespace PredmetniZadatak2
                     // u desno
                     if (columnStart < columnStop)
                     {
-                        Line line = ScreenHandler.DrawLine(x1, y1, x2, y2, myCanvas, networkModel.Lines[i]);
-           
+                        Line line = ScreenHandler.DrawLine(x1, y1, x2, y2, myCanvas, networkModel.Lines[i]);        
                         line.MouseRightButtonDown += SetDefault;
                         line.MouseRightButtonDown += GridHandler.Entities[idStart].ClickFunction;
                         line.MouseRightButtonDown += GridHandler.Entities[idStop].ClickFunction;
-
                         myCanvas.Children.Add(line);
                     }
                     // u lijevo
@@ -220,14 +217,14 @@ namespace PredmetniZadatak2
                     }
                     else
                     {
-                        // idem prvo na levo, ne mijenja se y1 koordinata
+                        // idem prvo na lijevo, ne mijenja se y1 koordinata
                         Line lineLeft = ScreenHandler.DrawLine(x1, y1, x2, y1, myCanvas, networkModel.Lines[i]);
                         lineLeft.MouseRightButtonDown += SetDefault;
                         lineLeft.MouseRightButtonDown += GridHandler.Entities[idStart].ClickFunction;
                         lineLeft.MouseRightButtonDown += GridHandler.Entities[idStop].ClickFunction;
                         myCanvas.Children.Add(lineLeft);
 
-                        // idem na dole, ne mijenja se x2 koordinata
+                        // idem na dolje, ne mijenja se x2 koordinata
                         Line lineDown = ScreenHandler.DrawLine(x2, y1, x2, y2, myCanvas, networkModel.Lines[i]);
                         lineDown.MouseRightButtonDown += SetDefault;
                         lineDown.MouseRightButtonDown += GridHandler.Entities[idStart].ClickFunction;
@@ -248,7 +245,7 @@ namespace PredmetniZadatak2
                         lineDown.MouseRightButtonDown += GridHandler.Entities[idStop].ClickFunction;
                         myCanvas.Children.Add(lineDown);
 
-                        // idem u desno, ne mijenja se y2 koordinata
+                        // idem na desno, ne mijenja se y2 koordinata
                         Line lineRight = ScreenHandler.DrawLine(x1, y2, x2, y2, myCanvas, networkModel.Lines[i]);
                         lineRight.MouseRightButtonDown += SetDefault;
                         lineRight.MouseRightButtonDown += GridHandler.Entities[idStart].ClickFunction;
@@ -272,12 +269,9 @@ namespace PredmetniZadatak2
                         myCanvas.Children.Add(lineDown);
                     }
                 }
-
-            
             }
         }
         #endregion
-
 
         public void SetDefault(object sender, EventArgs e)
         {
@@ -305,7 +299,6 @@ namespace PredmetniZadatak2
             temp.RenderTransform = scale;
             scale.BeginAnimation(ScaleTransform.ScaleXProperty, growAnimation);
             scale.BeginAnimation(ScaleTransform.ScaleYProperty, growAnimation);
-
         }
         #endregion
     }

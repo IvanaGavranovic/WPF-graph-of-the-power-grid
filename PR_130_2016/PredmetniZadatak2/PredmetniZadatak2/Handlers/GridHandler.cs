@@ -62,7 +62,7 @@ namespace PredmetniZadatak2.Handlers
 
                 Ellipse image = ScreenHandler.DrawSubstationImage(indexI, indexJ, myCanvas, networkModel.Substations[i]);
                 image.MouseLeftButtonDown += increase;
-                networkModel.Substations[i].shape = image;
+                networkModel.Substations[i].Shape = image;
                 myCanvas.Children.Add(image);
             }
 
@@ -99,7 +99,7 @@ namespace PredmetniZadatak2.Handlers
 
                 Ellipse image = ScreenHandler.DrawNodeImage(indexI, indexJ, myCanvas, networkModel.Nodes[i]);
                 image.MouseLeftButtonDown += increase;
-                networkModel.Nodes[i].shape = image;
+                networkModel.Nodes[i].Shape = image;
                 myCanvas.Children.Add(image);
             }
 
@@ -139,7 +139,7 @@ namespace PredmetniZadatak2.Handlers
 
                 Ellipse image = ScreenHandler.DrawSwitchImage(indexI, indexJ, myCanvas, networkModel.Switches[i]);
                 image.MouseLeftButtonDown += increase;
-                networkModel.Switches[i].shape = image;
+                networkModel.Switches[i].Shape = image;
                 myCanvas.Children.Add(image);
             }
 
@@ -197,8 +197,6 @@ namespace PredmetniZadatak2.Handlers
                     grid[indexI, indexJ] = networkModel.Nodes[i].Id;
                     spaceFound = true;
                 }
-
-                // trazi se u 16 krugova
                 if (++step == 16)
                 {
                     break;
@@ -257,7 +255,6 @@ namespace PredmetniZadatak2.Handlers
                     spaceFound = true;
                 }
 
-                // trazi se u 16 krugova
                 if (++step == 16)
                 {
                     break;
@@ -269,6 +266,5 @@ namespace PredmetniZadatak2.Handlers
 
             return spaceFound;
         }
-
     }
 }

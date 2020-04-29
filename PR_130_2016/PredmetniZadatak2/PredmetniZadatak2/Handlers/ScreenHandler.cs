@@ -19,8 +19,7 @@ namespace PredmetniZadatak2.Handlers
         public static double MinJ = 726;
         public static double MaxI = 811;
         public static double MaxJ = 951;
-        private static readonly object myCanvas;
-
+        
         public static Ellipse DrawSubstationImage(int indexI, int indexJ, Canvas myCanvas, SubstationEntity station)
         {
             Ellipse element = new Ellipse() { Width = 3, Height = 3, Fill = Brushes.LightGreen };
@@ -66,24 +65,6 @@ namespace PredmetniZadatak2.Handlers
             line.ToolTip = $"ID: {lineEntity.Id}\nLine Entity\nName:{lineEntity.Name}";
            
             return line;
-        }
-
-        public static Ellipse DrawIntersection(int indexI, int indexJ, Canvas myCanvas)
-        {
-            Ellipse element = new Ellipse() { Width = 3, Height = 3, Stroke = Brushes.Yellow, StrokeThickness = 1, Fill = Brushes.Transparent };
-            Canvas.SetLeft(element, ((double)indexJ - MinJ) / (MaxJ - MinJ) * myCanvas.Width);
-            Canvas.SetTop(element, ((double)indexI - MinI) / (MaxI - MinI) * myCanvas.Height);
-
-            return element;
-        }
-
-        public static Ellipse DrawColorElement(int indexI, int indexJ, Canvas myCanvas)
-        {
-            Ellipse element = new Ellipse() { Width = 3, Height = 3, Fill = Brushes.Purple };
-            Canvas.SetLeft(element, ((double)indexJ - MinJ) / (MaxJ - MinJ) * myCanvas.Width);
-            Canvas.SetTop(element, ((double)indexI - MinI) / (MaxI - MinI) * myCanvas.Height);
-
-            return element;
-        }
+        }     
     }
 }

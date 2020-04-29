@@ -30,21 +30,19 @@ namespace PredmetniZadatak2.Classes
         public int Row { get => row; set => row = value; }
         public int Column { get => column; set => column = value; }
 
+        [XmlIgnore]
+        public Ellipse Shape { get; set; }
+
         public Entity()
         {
-            shape = null;
+            Shape = null;
         }
-
-        [XmlIgnoreAttribute]
-        public Ellipse shape { get; set; }
 
         public void ClickFunction(object sender, EventArgs e)
         {
-            shape.Fill = Brushes.Purple;
+            Shape.Fill = Brushes.Purple;
         }
-        virtual public void SetDefaultColor()
-        {
 
-        }
+        virtual public void SetDefaultColor(){}
     }
 }

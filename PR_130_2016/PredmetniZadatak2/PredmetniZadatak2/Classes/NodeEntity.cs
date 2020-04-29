@@ -21,7 +21,7 @@ namespace PredmetniZadatak2.Classes
 
         public override void SetDefaultColor()
         {
-            shape.Fill = Brushes.Orange;
+            Shape.Fill = Brushes.Orange;
         }
     }
 }

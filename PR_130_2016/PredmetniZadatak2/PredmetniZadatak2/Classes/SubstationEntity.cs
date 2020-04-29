@@ -18,9 +18,10 @@ namespace PredmetniZadatak2.Classes
         {
             return String.Format($"Substation {Name}: x={Math.Round(X, 2)},y={Math.Round(Y, 2)}");
         }
+
         public override void SetDefaultColor()
         {
-            shape.Fill = Brushes.LightGreen;
+            Shape.Fill = Brushes.LightGreen;
         }
     }
 }

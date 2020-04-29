@@ -23,9 +23,10 @@ namespace PredmetniZadatak2.Classes
         {
             return String.Format($"Switch {Name} -> Status: {Status}\nx={Math.Round(X, 2)},y={Math.Round(Y, 2)}");
         }
+
         public override void SetDefaultColor()
         {
-            shape.Fill = Brushes.LightSkyBlue;
+            Shape.Fill = Brushes.LightSkyBlue;
         }
     }
 }
