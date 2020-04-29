@@ -1,8 +1,13 @@
-﻿using System;
+﻿using PredmetniZadatak2.Handlers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace PredmetniZadatak2.Classes
 {
@@ -25,5 +30,16 @@ namespace PredmetniZadatak2.Classes
         public int Column { get => column; set => column = value; }
 
         public Entity() { }
+
+        public Ellipse shape { get; set; }
+
+        public void ClickFunction(object sender, EventArgs e)
+        {
+            shape.Fill = Brushes.Purple;
+        }
+        virtual public void SetDefaultColor()
+        {
+
+        }
     }
 }

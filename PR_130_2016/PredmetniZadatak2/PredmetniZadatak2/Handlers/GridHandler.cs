@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 namespace PredmetniZadatak2.Handlers
@@ -30,7 +33,7 @@ namespace PredmetniZadatak2.Handlers
             return grid;
         }
 
-        public static NetworkModel LoadNetworkModel(NetworkModel networkModel, UInt64[,] grid, Canvas myCanvas)
+        public static NetworkModel LoadNetworkModel(NetworkModel networkModel, UInt64[,] grid, Canvas myCanvas, MouseButtonEventHandler increase)
         {
             int counter = 0;
 
@@ -58,6 +61,8 @@ namespace PredmetniZadatak2.Handlers
                 }
 
                 Ellipse image = ScreenHandler.DrawSubstationImage(indexI, indexJ, myCanvas, networkModel.Substations[i]);
+                image.MouseLeftButtonDown += increase;
+                networkModel.Substations[i].shape = image;
                 myCanvas.Children.Add(image);
             }
 
@@ -93,6 +98,8 @@ namespace PredmetniZadatak2.Handlers
                 Entities.Add(networkModel.Nodes[i].Id, networkModel.Nodes[i]);
 
                 Ellipse image = ScreenHandler.DrawNodeImage(indexI, indexJ, myCanvas, networkModel.Nodes[i]);
+                image.MouseLeftButtonDown += increase;
+                networkModel.Nodes[i].shape = image;
                 myCanvas.Children.Add(image);
             }
 
@@ -131,6 +138,8 @@ namespace PredmetniZadatak2.Handlers
                 Entities.Add(networkModel.Switches[i].Id, networkModel.Switches[i]);
 
                 Ellipse image = ScreenHandler.DrawSwitchImage(indexI, indexJ, myCanvas, networkModel.Switches[i]);
+                image.MouseLeftButtonDown += increase;
+                networkModel.Switches[i].shape = image;
                 myCanvas.Children.Add(image);
             }
 
@@ -141,7 +150,8 @@ namespace PredmetniZadatak2.Handlers
 
             return networkModel;
         }
-
+  
+      
         public static bool FindFreeSpaceForNode(NetworkModel networkModel, UInt64[,] grid, int indexI, int indexJ, int i, out int freeI, out int freeJ)
         {
             bool spaceFound = false;

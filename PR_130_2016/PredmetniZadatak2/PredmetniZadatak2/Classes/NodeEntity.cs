@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using System.Xml.Serialization;
 
 namespace PredmetniZadatak2.Classes
@@ -16,6 +17,11 @@ namespace PredmetniZadatak2.Classes
         public override string ToString()
         {
             return String.Format($"Node {Name}\nx={Math.Round(X, 2)},y={Math.Round(Y, 2)}");
+        }
+
+        public override void SetDefaultColor()
+        {
+            shape.Fill = Brushes.Orange;
         }
     }
 }
