@@ -45,14 +45,14 @@ namespace PredmetniZadatak2.Handlers
             var delt = Math.Atan(senoheps / (Math.Cos(nab)));
             var tao = Math.Atan(Math.Cos(delt) * Math.Tan(nab));
 
-            longitude = ((delt * (180.0 / Math.PI)) + s) + diflon;
-            latitude = ((lat + (1 + e2cuadrada * Math.Pow(Math.Cos(lat), 2) - (3.0 / 2.0) * e2cuadrada * Math.Sin(lat) * Math.Cos(lat) * (tao - lat)) * (tao - lat)) * (180.0 / Math.PI)) + diflat;
+            longitude = ((delt * (180.0 / Math.PI)) + s) + diflon;  //19.8481
+            latitude = ((lat + (1 + e2cuadrada * Math.Pow(Math.Cos(lat), 2) - (3.0 / 2.0) * e2cuadrada * Math.Sin(lat) * Math.Cos(lat) * (tao - lat)) * (tao - lat)) * (180.0 / Math.PI)) + diflat; // 45.2611
         }
 
         public static void FromCoordsToIndex(double latitude, double longitude, out int indexI, out int indexJ)
         {
-            indexI = 1000 - (int)((latitude - Math.Floor(latitude)) * 1000);
-            indexJ = (int)((longitude - Math.Floor(longitude)) * 1000);
+            indexI = 1000 - (int)((latitude - Math.Floor(latitude)) * 1000);    //739
+            indexJ = (int)((longitude - Math.Floor(longitude)) * 1000);         //848
         }
     }
 }
