@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace PredmetniZadatak2.Classes
 {
@@ -29,8 +30,12 @@ namespace PredmetniZadatak2.Classes
         public int Row { get => row; set => row = value; }
         public int Column { get => column; set => column = value; }
 
-        public Entity() { }
+        public Entity()
+        {
+            shape = null;
+        }
 
+        [XmlIgnoreAttribute]
         public Ellipse shape { get; set; }
 
         public void ClickFunction(object sender, EventArgs e)
